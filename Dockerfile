@@ -11,10 +11,12 @@ RUN \
   wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
   rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /usr/local/bin/phantomjs && \
-  git clone https://github.com/casperjs/casperjs.git /usr/local/bin/casperjs && \
+  mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /opt/phantomjs && \
+  ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs && \
+  git clone https://github.com/casperjs/casperjs.git /opt/casperjs && \
+  ln -s /opt/casperjs/bin/casperjs /usr/bin/casperjs && \
   apt-get autoremove -y && \
   apt-get clean all
 
 # Default command
-CMD ["/usr/local/bin/phantomjs"]
+CMD ["/usr/bin/phantomjs"]
